@@ -1,0 +1,19 @@
+<div
+  ng-if="dropper.statePageIs('main')"
+  ng-show="dropper.isHoverState"
+  class="file-dropper-wrap"
+  ng-class="{ 'file-dropper-no-overlay': !hasOverlay }"
+  os-dropzone="yank($file)">
+    <div class="file-dropper-border">
+      <div class="file-dropper-figure">
+        <svg-icon
+          path="{{icon}}"
+          width="80px" height="auto"></svg-icon>
+        <h1 class="file-dropper-text">{{ text }}</h1>
+        <span class="file-dropper-extensions">
+          {{ ::dropper.formats.getAllExtensions().join(', ') }}
+        </span>
+      </div>
+    </div>
+</div>
+<div ng-hide="dropper.isHoverState && hasOverlay && dropper.statePageIs('main')" ng-transclude></div>

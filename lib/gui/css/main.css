@@ -6488,6 +6488,42 @@ body {
 .modal-warning-modal .button, .modal-warning-modal .progress-button {
   text-transform: uppercase; }
 
+[file-dropper] {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9001; }
+
+.file-dropper-wrap {
+  background-color: #535760;
+  padding: 2rem;
+  height: 100%; }
+
+.file-dropper-border {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  border-radius: 10px;
+  border-style: dashed;
+  border-width: 4px;
+  border-color: #b3b3b3; }
+
+.file-dropper-figure {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  font-size: 2rem;
+  text-align: center;
+  color: #fff; }
+
+.file-dropper-no-overlay {
+  opacity: 0;
+  position: absolute; }
+
 /*
  * Copyright 2016 resin.io
  *
