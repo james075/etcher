@@ -69,6 +69,9 @@ else
 		ifneq ($(filter %86,$(shell uname -p)),)
 			HOST_ARCH = x86
 		endif
+		ifeq ($(shell uname -m),armv7l)
+			HOST_ARCH = armv7l
+		endif
 	endif
 	ifeq ($(shell uname -s),Darwin)
 		HOST_PLATFORM = darwin
@@ -133,12 +136,7 @@ endif
 # Extra variables
 # ---------------------------------------------------------------------
 
-ifeq ($(TARGET_ARCH),x86)
-	TARGET_ARCH_DEBIAN = i386
-endif
-ifeq ($(TARGET_ARCH),x64)
-	TARGET_ARCH_DEBIAN = amd64
-endif
+TARGET_ARCH_DEBIAN = $(shell ./scripts/build/architecture-get.sh -r $(TARGET_ARCH) -t debian)
 
 ifeq ($(RELEASE_TYPE),production)
 	PRODUCT_NAME = etcher
@@ -302,7 +300,7 @@ $(BUILD_OUTPUT_DIRECTORY)/$(APPLICATION_NAME)-$(APPLICATION_VERSION)-linux-$(TAR
 $(BUILD_OUTPUT_DIRECTORY)/$(APPLICATION_NAME_LOWERCASE)-electron_$(APPLICATION_VERSION_DEBIAN)_$(TARGET_ARCH_DEBIAN).deb: \
 	$(BUILD_DIRECTORY)/$(APPLICATION_NAME)-$(APPLICATION_VERSION)-linux-$(TARGET_ARCH) \
 	| $(BUILD_OUTPUT_DIRECTORY)
-	./scripts/build/electron-installer-debian-linux.sh -p $< -r "$(TARGET_ARCH)" -o $| \
+	./scripts/build/electron-installer-debian-linux.sh -p $< -r "$(TARGET_ARCH_DEBIAN)" -o $| \
 		-c scripts/build/debian/config.json
 
 # ---------------------------------------------------------------------
