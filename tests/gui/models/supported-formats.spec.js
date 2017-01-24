@@ -123,6 +123,35 @@ describe('Browser: SupportedFormats', function() {
 
     });
 
+    describe('.looksLikeWindowsImage()', function() {
+
+      it('should return true if filename is `en_windows_10_multiple_editions_version_1607_updated_jan_2017_x64_dvd_9714399.iso`',
+        function() {
+          const imagePath = '/path/to/en_windows_10_multiple_editions_version_1607_updated_jan_2017_x64_dvd_9714399.iso';
+          const looksLikeWindowsImage = SupportedFormatsModel.looksLikeWindowsImage(imagePath);
+          m.chai.expect(looksLikeWindowsImage).to.be.true;
+        });
+
+      it('should return true if filename is `Win10_1607_SingleLang_English_x32.iso`', function() {
+        const imagePath = '/path/to/Win10_1607_SingleLang_English_x32.iso';
+        const looksLikeWindowsImage = SupportedFormatsModel.looksLikeWindowsImage(imagePath);
+        m.chai.expect(looksLikeWindowsImage).to.be.true;
+      });
+
+      it('should return true if filename is `en_winxp_pro_x86_build2600_iso.img`', function() {
+        const imagePath = '/path/to/en_winxp_pro_x86_build2600_iso.img';
+        const looksLikeWindowsImage = SupportedFormatsModel.looksLikeWindowsImage(imagePath);
+        m.chai.expect(looksLikeWindowsImage).to.be.true;
+      });
+
+      it('should return false if filename is `2017-01-11-raspbian-jessie.img`', function() {
+        const imagePath = '/path/to/2017-01-11-raspbian-jessie.img';
+        const looksLikeWindowsImage = SupportedFormatsModel.looksLikeWindowsImage(imagePath);
+        m.chai.expect(looksLikeWindowsImage).to.be.false;
+      });
+
+    });
+
   });
 
 });
